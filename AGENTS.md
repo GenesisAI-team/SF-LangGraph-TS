@@ -43,16 +43,16 @@ minúsculas, sin espacios. Ej.: `feat/GEN-21-runstate-langgraph`.
 
 ## Estados de Linear ↔ workflow de la factory
 
-| Linear | Estado del run | Gate para salir |
-|---|---|---|
-| Todo | `ready` | envelope completo + aprobación humana |
-| In Progress | `preparing` → `planning` → `implementing` | plan y sandbox listos |
-| In Progress | `verifying` | `pnpm verify` verde localmente |
-| In Review | `reviewing` → `prReady` | CI verde en PR + revisión obtenida |
-| In Review | `awaitingMerge` | aprobación humana explícita |
-| Done | `done` | PR mergeada y evidencias archivadas |
-| Takky | `blocked` | decisión humana (solo el humano desbloquea) |
-| Takky | `repairing` | reintentos con presupuesto; humano decide al agotarlo |
+| Linear      | Estado del run                            | Gate para salir                                       |
+| ----------- | ----------------------------------------- | ----------------------------------------------------- |
+| Todo        | `ready`                                   | envelope completo + aprobación humana                 |
+| In Progress | `preparing` → `planning` → `implementing` | plan y sandbox listos                                 |
+| In Progress | `verifying`                               | `pnpm verify` verde localmente                        |
+| In Review   | `reviewing` → `prReady`                   | CI verde en PR + revisión obtenida                    |
+| In Review   | `awaitingMerge`                           | aprobación humana explícita                           |
+| Done        | `done`                                    | PR mergeada y evidencias archivadas                   |
+| Takky       | `blocked`                                 | decisión humana (solo el humano desbloquea)           |
+| Takky       | `repairing`                               | reintentos con presupuesto; humano decide al agotarlo |
 
 ## Comandos del workspace
 

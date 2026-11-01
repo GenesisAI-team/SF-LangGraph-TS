@@ -35,18 +35,18 @@ motor de ejecución (LangGraph) y políticas de riesgo explícitas.
 
 ## Decisiones por capa (resumen; detalle en ADRs)
 
-| Capa | Módulo | Rol | Estado |
-|---|---|---|---|
-| Runtime | `apps/api`, `apps/worker` | API HTTP y ejecución de runs | PENDIENTE |
-| Tipos | `packages/contracts` | esquemas Zod: IssueEnvelope, RunState, RiskPolicy, EvidenceBundle | base implementada |
-| Flujo | `packages/orchestration` | tabla de transición pura (fuente de verdad) | base implementada |
-| LLM | `packages/agents` | roles + prompts + salidas esquemadas | PENDIENTE |
-| Skills | `skillpacks/*` | packs instanciables de técnicas | PENDIENTE |
-| Detección | `packages/verification` | evidencias, checks, drift | PENDIENTE |
-| Aislamiento | `packages/sandbox` | ejecución acotada de comandos | PENDIENTE |
-| Mundo real | `packages/integrations` | GitHub, Linear, CI | PENDIENTE |
-| Auditoría | `evals/` | evaluaciones con promptfoo | PENDIENTE |
-| IaC | `infrastructure/` | protección de ramas, secrets | PENDIENTE |
+| Capa        | Módulo                    | Rol                                                               | Estado            |
+| ----------- | ------------------------- | ----------------------------------------------------------------- | ----------------- |
+| Runtime     | `apps/api`, `apps/worker` | API HTTP y ejecución de runs                                      | PENDIENTE         |
+| Tipos       | `packages/contracts`      | esquemas Zod: IssueEnvelope, RunState, RiskPolicy, EvidenceBundle | base implementada |
+| Flujo       | `packages/orchestration`  | tabla de transición pura (fuente de verdad)                       | base implementada |
+| LLM         | `packages/agents`         | roles + prompts + salidas esquemadas                              | PENDIENTE         |
+| Skills      | `skillpacks/*`            | packs instanciables de técnicas                                   | PENDIENTE         |
+| Detección   | `packages/verification`   | evidencias, checks, drift                                         | PENDIENTE         |
+| Aislamiento | `packages/sandbox`        | ejecución acotada de comandos                                     | PENDIENTE         |
+| Mundo real  | `packages/integrations`   | GitHub, Linear, CI                                                | PENDIENTE         |
+| Auditoría   | `evals/`                  | evaluaciones con promptfoo                                        | PENDIENTE         |
+| IaC         | `infrastructure/`         | protección de ramas, secrets                                      | PENDIENTE         |
 
 ## Decisiones de arquitectura
 

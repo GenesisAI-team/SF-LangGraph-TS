@@ -11,22 +11,22 @@ Requests implementadas, verificadas y preparadas para merge humano.
 Este repositorio esta en **fase bootstrap**. Lo siguiente esta implementado y lo
 demas queda explicitamente pendiente; nada simula funcionalidad operativa.
 
-| Ruta                     | Componente                                     | Estado                                          |
-| ------------------------ | ---------------------------------------------- | ----------------------------------------------- |
-| `packages/contracts`     | Contratos de entrada, estados y politicas      | Base implementada (5 esquemas Zod + tests)      |
-| `packages/orchestration` | Tabla de transicion de estados (pura)          | Base implementada (tabla con tests)             |
-| `packages/agents`        | Adaptadores de agentes (Codex/OpenCode/Claude) | Pendiente                                       |
-| `packages/integrations`  | Linear y GitHub                                | Pendiente                                       |
-| `packages/sandbox`       | Ejecucion aislada                              | Pendiente                                       |
-| `packages/verification`  | Quality gates y evidencias                     | Pendiente                                       |
-| `apps/api`               | API e integraciones                            | Pendiente                                       |
-| `apps/worker`            | Cola y workers (BullMQ)                        | Pendiente                                       |
-| `apps/dashboard`         | Interfaz auxiliar                              | Pendiente                                       |
-| `skillpacks/`            | Catalogo de skills                             | Catalogo declarado; packs por instalar          |
-| `evals/`                 | Evaluaciones (Promptfoo)                       | Diferido (requiere Node >= 22.22)               |
-| `infrastructure/`        | Docker y despliegue                            | Pendiente                                       |
-| `docs/`                  | Arquitectura, ADRs, runbooks                   | Base escrita (overview, ADRs 0001-0005, boot)   |
-| `.github/workflows`      | CI con Node 22 + pnpm                          | Implementada (job `ci`)                         |
+| Ruta                     | Componente                                     | Estado                                        |
+| ------------------------ | ---------------------------------------------- | --------------------------------------------- |
+| `packages/contracts`     | Contratos de entrada, estados y politicas      | Base implementada (5 esquemas Zod + tests)    |
+| `packages/orchestration` | Tabla de transicion de estados (pura)          | Base implementada (tabla con tests)           |
+| `packages/agents`        | Adaptadores de agentes (Codex/OpenCode/Claude) | Pendiente                                     |
+| `packages/integrations`  | Linear y GitHub                                | Pendiente                                     |
+| `packages/sandbox`       | Ejecucion aislada                              | Pendiente                                     |
+| `packages/verification`  | Quality gates y evidencias                     | Pendiente                                     |
+| `apps/api`               | API e integraciones                            | Pendiente                                     |
+| `apps/worker`            | Cola y workers (BullMQ)                        | Pendiente                                     |
+| `apps/dashboard`         | Interfaz auxiliar                              | Pendiente                                     |
+| `skillpacks/`            | Catalogo de skills                             | Catalogo declarado; packs por instalar        |
+| `evals/`                 | Evaluaciones (Promptfoo)                       | Diferido (requiere Node >= 22.22)             |
+| `infrastructure/`        | Docker y despliegue                            | Pendiente                                     |
+| `docs/`                  | Arquitectura, ADRs, runbooks                   | Base escrita (overview, ADRs 0001-0005, boot) |
+| `.github/workflows`      | CI con Node 22 + pnpm                          | Implementada (job `ci`)                       |
 
 ## Stack
 
