@@ -1,0 +1,22 @@
+{
+  "name": "@sf/orchestration",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Tabla de transicion determinista de estados de ejecucion (GEN-16)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.build.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@sf/contracts": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "vitest": "catalog:"
+  }
+}

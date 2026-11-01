@@ -43,7 +43,7 @@ pnpm typecheck     # tsc --noEmit por paquete
 pnpm test          # Vitest por paquete
 pnpm build         # compilacion por paquete
 pnpm format:check  # Prettier (solo lectura)
-pnpm ci            # todo lo anterior en orden
+pnpm verify        # format + lint + typecheck + test + build
 ```
 
 ## Reglas operativas

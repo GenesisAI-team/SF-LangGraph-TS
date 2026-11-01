@@ -11,7 +11,7 @@
     "typecheck": "pnpm -r --if-present typecheck",
     "test": "pnpm -r --if-present test",
     "build": "pnpm -r --if-present build",
-    "ci": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm build"
+    "verify": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm build"
   },
   "devDependencies": {
     "@eslint/js": "catalog:",
