@@ -27,7 +27,7 @@ su licencia es compatible (ambos origenes son MIT).
 | grill-with-docs | PLAN (humano) | PENDIENTE | idem con documentos |
 | to-spec | PLAN (humano) | PENDIENTE | refinamiento a especificacion |
 | to-tickets | PLAN (humano) | PENDIENTE | refinamiento a issues |
-| gauntlet-audit | VERIFY | PENDIENTE | adaptar: auditoria con atas de seguridad |
+| gauntlet-audit | VERIFY | PENDIENTE | adaptar: auditoria adversarial del run |
 | explain-pr | REVIEW | PENDIENTE | adaptar: generacion de texto para PR |
 
 ## Custom (autoria propia, requiere definicion)
