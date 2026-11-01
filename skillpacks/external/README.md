@@ -1,6 +1,9 @@
-# skillpacks/external - PENDIENTE
+# skillpacks/external — Skills externas
 
-Destino de las skills de referencia versionadas (mattpocock/skills y
-540/agentic-toolbox) tras fijar SHA, licencia y fase de uso en
-`skillpacks/catalog.yaml` (sub-issue Skills & Evaluations). Nada instalado
-todavia: no se instalan skills indiscriminadamente durante el bootstrap.
+Packs de skills originados en repos externos, instanciados para la factory.
+Versiones: `mattpocock/skills @ a496f55` y `540/agentic-toolbox @ 0ecb4ee`,
+ambos MIT. El detalle de instalacion por skill, fase del workflow y
+adaptaciones necesarias vive en `skillpacks/catalog.md`.
+
+Estado: catalogo definido; instalacion de packs PENDIENTE (sub-issue de
+skills).

@@ -1,6 +1,5 @@
-# skillpacks/custom - PENDIENTE
+# skillpacks/custom — Skills propias
 
-Destino de las skills propias definidas en GEN-16, seccion 6:
-plan-implementation, verify-acceptance, review-risk, repair-failure,
-browser-qa, detect-spec-drift, review-migration. Cada una se versionara y
-evaluara antes de entrar en produccion. Nada desarrollado todavia.
+Packs de autoria propia (identificados en catalog.md como custom), que
+instancia el motor de agents en los hilos de cada run. Estado: definiciones
+PENDIENTES salvo notas iniciales en `skillpacks/catalog.md`.
