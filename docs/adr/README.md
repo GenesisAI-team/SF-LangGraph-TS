@@ -10,3 +10,4 @@ Registro de decisiones de arquitectura. Toda desviación de las reglas de
 | 0003 | LangGraph sobre tabla de transición pura | Aceptado |
 | 0004 | Riesgo acotado y evidencias obligatorias | Aceptado |
 | 0005 | Ejecución aislada por repo (sandbox)     | Aceptado |
+| 0006 | Motor de episodios y checkpoints         | Aceptado |

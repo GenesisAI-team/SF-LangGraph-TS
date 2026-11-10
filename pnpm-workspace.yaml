@@ -4,6 +4,7 @@ packages:
 
 catalog:
   "@types/node": ^26.6.6
+  "@langchain/langgraph": 1.7.3
   "@eslint/js": 10.0.1
   eslint: 10.14.0
   eslint-config-prettier: 10.1.8

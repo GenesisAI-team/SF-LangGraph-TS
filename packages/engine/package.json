@@ -1,0 +1,25 @@
+{
+  "name": "@sf/engine",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Motor LangGraph de episodios con checkpoints y guardrails (GEN-48)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.build.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@langchain/langgraph": "catalog:",
+    "@sf/contracts": "workspace:*",
+    "@sf/orchestration": "workspace:*",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "vitest": "catalog:"
+  }
+}
