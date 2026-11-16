@@ -130,6 +130,18 @@ function decideFailure(
   });
 }
 
+/**
+ * Limite de `reason` en `transitionEventSchema` (@sf/contracts). Los prefijos
+ * que el motor antepone al reason del paso (reparacion, fallo definitivo y
+ * presupuesto agotado) deben acotarse para que el evento construido quepa.
+ */
+const EVENT_REASON_LIMIT = 500;
+
+/** Acota el reason ya prefijado para que el evento cumpla transitionEventSchema. */
+function boundEventReason(reason: string): string {
+  return reason.length <= EVENT_REASON_LIMIT ? reason : reason.slice(0, EVENT_REASON_LIMIT);
+}
+
 type TransitionOutcome = {
   kind: "transition";
   to: RunState;
@@ -186,7 +198,7 @@ function commitTransition(params: {
     issueId: runtime.issueId,
     from: runtime.runState,
     to,
-    reason,
+    reason: boundEventReason(reason),
     at,
   };
   return {
