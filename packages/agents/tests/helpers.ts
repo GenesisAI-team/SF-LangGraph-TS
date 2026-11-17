@@ -86,6 +86,15 @@ export const verifyFailedOutput: VerifyAgentOutput = {
   evidence: [],
 };
 
+/** Salida contradictoria: veredicto passed con un check fallido (hilo P1 de la revision GEN-53). */
+export const contradictoryVerifyOutput: VerifyAgentOutput = {
+  role: "verify",
+  summary: "veredicto passed con check fallido",
+  verdict: "passed",
+  checks: [{ name: "pnpm-verify", passed: false, detail: "el build fallo" }],
+  evidence: [],
+};
+
 export const reviewApprovedOutput: ReviewAgentOutput = {
   role: "review",
   summary: "cambios conforme al objetivo",

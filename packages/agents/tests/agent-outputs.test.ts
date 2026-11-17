@@ -9,9 +9,11 @@ import {
   validateRoleOutput,
   verifyOutputSchema,
 } from "../src/index.js";
+import type { VerifyAgentOutput } from "../src/index.js";
 import {
   reviewApprovedOutput,
   reviewChangesOutput,
+  contradictoryVerifyOutput,
   validImplementOutput,
   validPlanOutput,
   validRepairOutput,
@@ -103,6 +105,22 @@ describe("salidas esquemadas por rol", () => {
         checks: [{ name: "pnpm-verify", passed: "si", detail: "detalle" }],
       }).success,
     ).toBe(false);
+  });
+
+  it("rechaza un veredicto passed con checks fallidos: salida contradictoria", () => {
+    expect(verifyOutputSchema.safeParse(contradictoryVerifyOutput).success).toBe(false);
+    expect(agentOutputSchema.safeParse(contradictoryVerifyOutput).success).toBe(false);
+    expect(validateRoleOutput("verify", contradictoryVerifyOutput).ok).toBe(false);
+  });
+
+  it("acepta un veredicto failed con todos los checks pasados: conservador y sin avance", () => {
+    const conservador: VerifyAgentOutput = {
+      ...verifyPassedOutput,
+      verdict: "failed",
+      summary: "veredicto failed sin checks fallidos",
+    };
+    expect(verifyOutputSchema.safeParse(conservador).success).toBe(true);
+    expect(validateRoleOutput("verify", conservador).ok).toBe(true);
   });
 
   it("rechaza una salida de otro rol via validateRoleOutput", () => {

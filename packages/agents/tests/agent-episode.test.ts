@@ -15,6 +15,7 @@ import {
   EPISODE_ID,
   evidence,
   fullSteps,
+  contradictoryVerifyOutput,
   invalidPlanOutput,
   invalidVerifyOutput,
   reviewApprovedOutput,
@@ -178,6 +179,61 @@ describe("integracion de roles con episodios", () => {
     expect(adapter.invocationsFor("verify")).toBe(2);
     expect(adapter.invocationsFor("repair")).toBe(1);
     expect(adapter.invocationsFor("review")).toBe(0);
+  });
+
+  it("reintenta una salida contradictoria y avanza cuando el adaptador la corrige", async () => {
+    const { motor, adapter } = buildMotor({
+      scripts: {
+        plan: [validPlanOutput],
+        implement: [validImplementOutput],
+        verify: [contradictoryVerifyOutput, verifyPassedOutput],
+        review: [reviewApprovedOutput],
+      },
+    });
+
+    const result = await motor.start(runInput);
+
+    expect(result.status).toBe("completed");
+    expect(result.runtime.runState).toBe("done");
+    expect(
+      result.runtime.events.filter(
+        (event) => event.from === "verifying" && event.to === "reviewing",
+      ),
+    ).toHaveLength(1);
+    expect(
+      result.runtime.evidence.filter((entry) => entry.name === "agent-verify-invalid-output"),
+    ).toHaveLength(1);
+    expect(adapter.invocationsFor("verify")).toBe(2);
+    expect(adapter.invocationsFor("review")).toBe(1);
+  });
+
+  it("un veredicto passed con checks fallidos es salida invalida y bloquea sin pasar a reviewing", async () => {
+    const { motor, adapter } = buildMotor(
+      {
+        scripts: {
+          plan: [validPlanOutput],
+          implement: [validImplementOutput],
+          verify: [contradictoryVerifyOutput],
+        },
+      },
+      { ...baseBudget, maxAttempts: 2 },
+    );
+
+    const result = await motor.start(runInput);
+
+    expect(result.status).toBe("blocked");
+    expect(result.runtime.runState).toBe("blocked");
+    expect(result.runtime.failure?.code).toBe("DEFINITIVO");
+    expect(result.runtime.attempt).toBe(1);
+    expect(result.runtime.events.map((event) => `${event.from}->${event.to}`)).not.toContain(
+      "verifying->reviewing",
+    );
+    expect(
+      result.runtime.evidence.filter((entry) => entry.name === "agent-verify-invalid-output"),
+    ).toHaveLength(2);
+    expect(adapter.invocationsFor("verify")).toBe(2);
+    expect(adapter.invocationsFor("review")).toBe(0);
+    expect(adapter.invocationsFor("repair")).toBe(0);
   });
 
   it("un review con cambios solicitados dispara reparacion y el episodio termina en done", async () => {

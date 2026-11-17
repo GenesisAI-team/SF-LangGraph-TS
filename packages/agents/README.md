@@ -24,6 +24,9 @@ errores tipados y adaptadores simulados deterministas (GEN-53).
   (transiciones legales, fallos reparables o definitivos con evidencia). Los
   checks del rol verify se convierten en `EvidenceEntry`; una verificacion
   fallida o un review con cambios disparan el ciclo de reparacion del motor.
+  Un veredicto passed con checks fallidos es una salida contradictoria
+  (verificacion local en rojo, AGENTS.md): el esquema la rechaza y el gestor
+  la reintenta con su presupuesto, sin avanzar a reviewing.
 
 ## Errores tipados
 

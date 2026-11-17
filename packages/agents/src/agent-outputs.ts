@@ -44,6 +44,12 @@ const checkSchema = z
   })
   .strict();
 
+/**
+ * Un veredicto passed con checks fallidos es una salida contradictoria: el
+ * repositorio exige verificacion local verde antes de salir de verifying
+ * (AGENTS.md), asi que se rechaza en la validacion y el gestor la reintenta
+ * con su presupuesto en lugar de avanzar a reviewing (revision GEN-53).
+ */
 export const verifyOutputSchema = z
   .object({
     role: z.literal("verify"),
@@ -52,7 +58,16 @@ export const verifyOutputSchema = z
     checks: z.array(checkSchema).min(1).max(50),
     evidence: evidenceListSchema,
   })
-  .strict();
+  .strict()
+  .superRefine((output, ctx) => {
+    if (output.verdict === "passed" && output.checks.some((check) => !check.passed)) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["verdict"],
+        message: "un veredicto passed no puede coexistir con checks fallidos",
+      });
+    }
+  });
 
 export const reviewOutputSchema = z
   .object({
