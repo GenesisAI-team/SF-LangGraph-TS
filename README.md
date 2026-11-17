@@ -15,6 +15,7 @@ demas queda explicitamente pendiente; nada simula funcionalidad operativa.
 | ------------------------ | ---------------------------------------------- | --------------------------------------------- |
 | `packages/contracts`     | Contratos de entrada, estados y politicas      | Base implementada (5 esquemas Zod + tests)    |
 | `packages/orchestration` | Tabla de transicion de estados (pura)          | Base implementada (tabla con tests)           |
+| `packages/engine`        | Motor LangGraph de episodios y checkpoints     | Base implementada (motor + adapter + tests)   |
 | `packages/agents`        | Adaptadores de agentes (Codex/OpenCode/Claude) | Pendiente                                     |
 | `packages/integrations`  | Linear y GitHub                                | Pendiente                                     |
 | `packages/sandbox`       | Ejecucion aislada                              | Pendiente                                     |
@@ -31,9 +32,10 @@ demas queda explicitamente pendiente; nada simula funcionalidad operativa.
 ## Stack
 
 TypeScript (6.0.3), Node 22+ recomendado, pnpm workspaces con catalogo de
-versiones, ESLint 10 + typescript-eslint, Prettier, Vitest, Zod.
-LangGraph.js, PostgreSQL, Redis/BullMQ, Codex SDK, Docker y OpenTelemetry se
-incorporan en las sub-issues correspondientes de GEN-16.
+versiones, ESLint 10 + typescript-eslint, Prettier, Vitest, Zod y
+LangGraph.js (motor `@sf/engine`, GEN-48). PostgreSQL, Redis/BullMQ, Codex
+SDK, Docker y OpenTelemetry se incorporan en las sub-issues correspondientes
+de GEN-16.
 
 ## Comandos
 
