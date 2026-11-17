@@ -10,7 +10,11 @@ errores tipados y reanudacion sin repetir pasos finalizados (GEN-48).
   por Zod en cada escritura, incluida la entrada de `invoke`) y un nodo por
   estado activo (`ready` ... `awaitingMerge`). Cada nodo ejecuta el handler
   inyectado para ese estado y valida su salida con `stepResultSchema`
-  (`kind: transition | failure | pause`).
+  (`kind: transition | failure | pause`). El limite de evidencia por paso
+  (110 entradas) cubre el peor caso legal de un paso de rol: 50 checks del
+  rol verify + 50 evidencias de salida + 9 reintentos del gestor, de modo
+  que combinar evidencias no aborte el episodio con `InvalidStepResultError`
+  ni descarte evidencia de auditoria.
 - La guarda pura `decideStepOutcome` convierte el resultado del paso en el
   siguiente runtime: verifica la legalidad con `canTransition` de la tabla,
   aplica el budget (`ExecutionBudget` de `@sf/contracts`), anota
