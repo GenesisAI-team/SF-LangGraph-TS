@@ -18,12 +18,14 @@ import {
   contradictoryVerifyOutput,
   invalidPlanOutput,
   invalidVerifyOutput,
+  planOutputWithFullEvidence,
   reviewApprovedOutput,
   reviewChangesOutput,
   validImplementOutput,
   validPlanOutput,
   validRepairOutput,
   verifyFailedOutput,
+  verifyOutputWithFullChecks,
   verifyPassedOutput,
 } from "./helpers.js";
 
@@ -234,6 +236,51 @@ describe("integracion de roles con episodios", () => {
     expect(adapter.invocationsFor("verify")).toBe(2);
     expect(adapter.invocationsFor("review")).toBe(0);
     expect(adapter.invocationsFor("repair")).toBe(0);
+  });
+
+  it("un verify con 50 checks y evidencia de salida completa avanza a reviewing con toda la auditoria", async () => {
+    const { motor } = buildMotor({
+      scripts: {
+        plan: [validPlanOutput],
+        implement: [validImplementOutput],
+        verify: [verifyOutputWithFullChecks()],
+        review: [reviewApprovedOutput],
+      },
+    });
+
+    const result = await motor.start(runInput);
+
+    expect(result.status).toBe("completed");
+    expect(result.runtime.runState).toBe("done");
+    expect(
+      result.runtime.events.filter(
+        (event) => event.from === "verifying" && event.to === "reviewing",
+      ),
+    ).toHaveLength(1);
+    expect(result.runtime.evidence.filter((entry) => entry.name.startsWith("check-"))).toHaveLength(
+      50,
+    );
+    expect(result.runtime.evidence).toContainEqual(evidence("logs-ci", "salida de CI completa"));
+  });
+
+  it("evidencia de reintentos de otro rol no desborda el contrato del motor", async () => {
+    const { motor, adapter } = buildMotor({
+      scripts: {
+        plan: [invalidPlanOutput, planOutputWithFullEvidence()],
+        implement: [validImplementOutput],
+        verify: [verifyPassedOutput],
+        review: [reviewApprovedOutput],
+      },
+    });
+
+    const result = await motor.start(runInput);
+
+    expect(result.status).toBe("completed");
+    expect(result.runtime.runState).toBe("done");
+    expect(adapter.invocationsFor("plan")).toBe(2);
+    expect(
+      result.runtime.evidence.filter((entry) => entry.name.startsWith("plan-log-")),
+    ).toHaveLength(50);
   });
 
   it("un review con cambios solicitados dispara reparacion y el episodio termina en done", async () => {

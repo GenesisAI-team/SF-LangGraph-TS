@@ -95,6 +95,32 @@ export const contradictoryVerifyOutput: VerifyAgentOutput = {
   evidence: [],
 };
 
+/** Verificacion en el maximo legal del esquema: 50 checks + 1 evidencia de salida. */
+export function verifyOutputWithFullChecks(): VerifyAgentOutput {
+  return {
+    role: "verify",
+    summary: "gates verdes con 50 checks",
+    verdict: "passed",
+    checks: Array.from({ length: 50 }, (_, index) => ({
+      name: `check-${index + 1}`,
+      passed: true,
+      detail: "en verde",
+    })),
+    evidence: [evidence("logs-ci", "salida de CI completa")],
+  };
+}
+
+/** Plan con evidencia en el maximo legal del esquema: 50 entradas. */
+export function planOutputWithFullEvidence(): PlanAgentOutput {
+  return {
+    ...validPlanOutput,
+    summary: "plan con evidencia completa",
+    evidence: Array.from({ length: 50 }, (_, index) =>
+      evidence(`plan-log-${index + 1}`, "detalle de auditoria"),
+    ),
+  };
+}
+
 export const reviewApprovedOutput: ReviewAgentOutput = {
   role: "review",
   summary: "cambios conforme al objetivo",

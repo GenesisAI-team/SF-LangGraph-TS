@@ -2,9 +2,19 @@ import { z } from "zod";
 
 import { evidenceEntrySchema, runStateSchema } from "@sf/contracts";
 
+/**
+ * Limite de evidencia por resultado de paso: cubre el peor caso legal de un
+ * paso de rol sin descartar evidencia de auditoria. Un verify puede aportar
+ * 50 checks + 50 evidencias de salida (limites de agent-outputs) y hasta 9
+ * entradas de reintentos del gestor (maxAttempts <= 10 en
+ * executionBudgetSchema de @sf/contracts); combinarlos no debe abortar el
+ * episodio con InvalidStepResultError (revision GEN-53).
+ */
+const MAX_STEP_EVIDENCE = 110;
+
 const evidenceListSchema = z
   .array(evidenceEntrySchema)
-  .max(50)
+  .max(MAX_STEP_EVIDENCE)
   .default(() => []);
 
 export const stepTransitionResultSchema = z
